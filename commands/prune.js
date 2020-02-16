@@ -1,4 +1,12 @@
-module.exports = (client, message, args) =>{
+module.exports = {
+    name: 'prune',
+    description: 'Prune the last X messages that are not 2 weeks old',
+    execute(message, args) {
+        removeMessages(message, args);
+    },
+};
+
+function removeMessages(message, args) {
     const amount = parseInt(args[0]) + 1;
 
     if (isNaN(amount)) {
@@ -9,6 +17,7 @@ module.exports = (client, message, args) =>{
     }
 
     message.channel.bulkDelete(amount, true).catch(err => {
+        console.log(err);
         message.channel.send('there was an error trying to prune messages in this channel!');
     });
-};
+}

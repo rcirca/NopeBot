@@ -1,4 +1,12 @@
-module.exports = message =>{
+module.exports = {
+    name: 'time',
+    descritpion: 'Relays bot local time',
+    execute(message) {
+        getTime(message);
+    },
+};
+
+function getTime(message) {
     const date = new Date();
     let hours = date.getHours();
 
@@ -9,4 +17,4 @@ module.exports = message =>{
     const minutes = date.getMinutes();
 
     return message.reply(`Time is: ${hours}:${minutes}`);
-};
+}
