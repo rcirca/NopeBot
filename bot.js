@@ -1,4 +1,4 @@
-require('dotenv').config();
+const { token } = require('./config.json');
 
 const fs = require ('fs');
 fs.readdir('./events/', (err, files) =>{
@@ -12,4 +12,4 @@ fs.readdir('./events/', (err, files) =>{
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(token);
