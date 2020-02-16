@@ -1,6 +1,10 @@
 module.exports = {
     name: 'prune',
     description: 'Prune the last X messages that are not 2 weeks old',
+    args: true,
+    usage: '<amount>',
+    example: 'prune 4',
+    exampleDescription: 'Removes the last 4 messages',
     execute(message, args) {
         removeMessages(message, args);
     },
