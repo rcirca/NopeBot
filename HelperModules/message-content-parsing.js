@@ -1,13 +1,12 @@
-module.exports = (client, mention) => {
+module.exports = (mention) => {
     if(!mention) return;
 
-    if(mention.startsWith(`<@`) && mention.endsWith(`>`)){
+    if(mention.startsWith('<@') && mention.endsWith('>')) {
         mention = mention.slice(2, -1);
 
-        if(mention.startsWith(`!`)){
+        if(mention.startsWith('!')) {
             mention = mention.slice(1);
         }
     }
-
-    return client.users.get(mention);
-}
+    return mention;
+};
