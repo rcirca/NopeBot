@@ -11,6 +11,8 @@ module.exports = (client, message) =>{
 
     const command = client.commands.get(commandName);
 
+    if (command.guildOnly && message.channel.type !== 'text') return;
+
     if(command.args && !args.length) {
         let reply = `Missing arguments ${message.author}`;
         if(command.usage) {
@@ -20,7 +22,6 @@ module.exports = (client, message) =>{
     }
 
     try{
-
         command.execute(message, args);
     }
     catch (error) {

@@ -5,6 +5,7 @@ module.exports = {
     usage: '<amount>',
     example: 'prune 4',
     exampleDescription: 'Removes the last 4 messages',
+    guildOnly: true,
     execute(message, args) {
         removeMessages(message, args);
     },
