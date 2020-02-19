@@ -1,8 +1,9 @@
 const message_content_parsing = require('../HelperModules/message-content-parsing');
+
 module.exports = {
     name: 'mute',
-    description: '',
-    usage: '',
+    description: 'Premitive way to mute someone, deletes their message as it gets displayed',
+    usage: '[mention user]',
     execute(message, args) {
         muteUser(message, args);
     },
