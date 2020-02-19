@@ -13,8 +13,9 @@ function getTime(message) {
     if(hours > 12) {
         hours = hours - 12;
     }
+    hours = String(hours).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
 
-    const minutes = date.getMinutes();
 
-    return message.reply(`Time is: ${hours}:${minutes}`);
+    return message.channel.send(`Time is: ${hours}:${minutes}`);
 }
