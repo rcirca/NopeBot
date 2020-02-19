@@ -2,6 +2,12 @@ const { prefix } = require('../config.json');
 
 module.exports = (client, message) =>{
 
+    const mutedUser = client.mutedUsers.get(message.author.id);
+    if(mutedUser) {
+        message.delete();
+        return;
+    }
+
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
