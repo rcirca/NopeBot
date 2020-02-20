@@ -1,7 +1,7 @@
 const messageContentParsing = require('../helper-modules/message-content-parsing');
 
 module.exports = {
-    name: 'mute',
+    name: 'callate',
     description: 'Premitive way to mute someone, deletes their message as it gets displayed',
     usage: '[mention user]',
     guildOnly: true,
@@ -11,7 +11,7 @@ module.exports = {
 };
 
 function muteUser(message, args) {
-    if(message.author.id !== message.guild.ownerID) return;
+    if(message.author.id !== message.guild.ownerID && !message.member.roles.some(p => p.name === 'LWD')) return;
 
     if(args[0]) {
         const userMentioned = messageContentParsing(args[0]);
