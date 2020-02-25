@@ -11,8 +11,9 @@ module.exports = {
 };
 
 function muteUser(message, args) {
-    if(message.author.id !== message.guild.ownerID && !message.member.roles.some(p => p.name === 'LWD')) return;
-
+    console.log('Check if you can mute user');
+    if(message.author.id !== message.guild.ownerID && !message.member.roles.some(p => p.name === 'LWD' || p === 'DJ')) return;
+    console.log('User is owner, or has roles');
     if(args[0]) {
         const userMentioned = messageContentParsing(args[0]);
         const user = message.client.users.get(userMentioned);
@@ -23,5 +24,6 @@ function muteUser(message, args) {
             return message.reply('Can not mute owner');
         }
         message.client.mutedUsers.set(user.id, user);
+        console.log(`Muted ${user}`);
     }
 }
