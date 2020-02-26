@@ -14,8 +14,9 @@ module.exports = {
 
 function unmute(message, args) {
     if(args[0]) {
+        const { member } = message;
         console.log('Try to unmute user');
-        if(message.author.id !== message.guild.ownerID && !message.member.roles.some(p => p.name === 'LWD' || p.name === 'DJ')) return;
+        if(message.author.id !== message.guild.ownerID && !member.roles.some(p => p.name === 'LWD' || p.name === 'DJ' || p.name === 'Mod')) return;
 
         console.log('Is owner or has role to unmute');
 
