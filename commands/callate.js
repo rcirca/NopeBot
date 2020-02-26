@@ -11,8 +11,10 @@ module.exports = {
 };
 
 function muteUser(message, args) {
+    const { member } = message;
     console.log('Check if you can mute user');
-    if(message.author.id !== message.guild.ownerID && !message.member.roles.some(p => p.name === 'LWD' || p === 'DJ')) return;
+    if(message.author.id !== message.guild.ownerID && !member.roles.find(p => p.name === 'LWD' || p.name === 'DJ' || p.name === 'Mod')) return;
+
     console.log('User is owner, or has roles');
     if(args[0]) {
         const userMentioned = messageContentParsing(args[0]);
