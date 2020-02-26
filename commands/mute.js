@@ -34,11 +34,7 @@ function mute(message, args) {
 
         if(!memberToMute) return message.reply('User is not in this server');
 
-        const mutedRole = message.guild.roles.find(r => r.name === 'Muted');
-
-        if(!mutedRole) return message.reply('Did not find role');
-
-        memberToMute.addRole(mutedRole).catch(console.error);
+        memberToMute.setMute(true);
     }
 
 }
