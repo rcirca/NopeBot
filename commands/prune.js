@@ -1,8 +1,8 @@
 module.exports = {
     name: 'prune',
     description: 'Prune the last X messages that are not 2 weeks old',
-    args: true,
     usage: '[amount]',
+    args: true,
     guildOnly: true,
     execute(message, args) {
         removeMessages(message, args);

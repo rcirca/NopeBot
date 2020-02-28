@@ -4,6 +4,7 @@ module.exports = {
     name: 'callate',
     description: 'Premitive way to mute someone, deletes their message as it gets displayed',
     usage: '[mention user]',
+    args: true,
     guildOnly: true,
     execute(message, args) {
         muteUser(message, args);

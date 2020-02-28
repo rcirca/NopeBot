@@ -51,7 +51,7 @@ function sendUsageOfCommandToUser(message, args) {
 
     if(command.description) data.push(`**Description:** ${command.description}`);
     if(command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-    if(command.noArgsUsage) data.push(`**Usage without Args:** ${prefix}${command.name}`);
+    if(command.altUsage) data.push(`**Alternative Usage:** ${prefix}${command.name} ${command.alternUsage}`);
 
     message.channel.send(data, { split: true });
 }

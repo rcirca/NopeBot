@@ -5,6 +5,7 @@ module.exports = {
     name: 'mute',
     description: 'mute user a user',
     usage: '[user_to_unmute]',
+    args: true,
     guildOnly: true,
     execute(message, args) {
         mute(message, args);

@@ -4,7 +4,7 @@ module.exports = {
     name: 'habla',
     description: 'Unmute user or get a list of users who are muted',
     usage: '[user_to_unmute]',
-    noArgsUsage: true,
+    altUsage: true,
     guildOnly: true,
     execute(message, args) {
         unmute(message, args);
