@@ -2,6 +2,8 @@ const fs = require ('fs');
 const { token } = require('./config.json');
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const ServerManager = require('./models/server-config.js/index.js');
+const servers = new ServerManager.Servers();
 
 fs.readdir('./events/', (err, files) =>{
     files.forEach(file =>{
@@ -11,6 +13,7 @@ fs.readdir('./events/', (err, files) =>{
     });
 });
 
+client.servers = servers;
 client.commands = new Discord.Collection();
 // probably better per server
 client.mutedUsers = new Discord.Collection();
