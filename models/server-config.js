@@ -1,5 +1,11 @@
 const Discord = require('discord.js');
 
+/* This could be better. Find better name?
+always rely on Discord.Collection, or just use map?
+*/
+
+// todo: proper storage, currently gets deleted, and goes to default values, and empty collections.
+
 module.exports = class ServerConfig {
     constructor(guild) {
         this._guild = guild;

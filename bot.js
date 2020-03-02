@@ -15,10 +15,6 @@ fs.readdir('./events/', (err, files) =>{
 
 client.servers = servers;
 client.commands = new Discord.Collection();
-// probably better per server
-client.mutedUsers = new Discord.Collection();
-client.notifyNewEmoji = false;
-client.notifyChannelOfEmoji = undefined;
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
