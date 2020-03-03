@@ -15,27 +15,26 @@ module.exports = {
 
 function mute(message, args) {
 
-    if(!message) return;
-
-    const { member } = message;
-    if(!member) return;
+    const { client, guild, member } = message;
 
     if(args[0]) {
-        if(!member.hasPermission(permissions.manageMessages)) return;
+        if(!member.hasPermission(permissions.muteUsersVoice)) {
+            message.author.send('Don\'t have the right permissions to mute');
+            return message.delete();
+        }
 
         const userMentioned = messageContentParsing(args[0]);
-        const userToMute = message.client.users.get(userMentioned);
+        const userToMute = client.users.get(userMentioned);
         if(!userToMute) {
             return message.reply('Please use a proper mention if you want to mute someone');
         }
-        else if(userToMute.id === message.guild.ownerID) {
+        else if(userToMute.id === guild.ownerID) {
             return message.reply('Can not mute owner');
         }
-        const memberToMute = message.guild.member(userToMute);
+        const memberToMute = guild.member(userToMute);
 
         if(!memberToMute) return message.reply('User is not in this server');
 
-        memberToMute.setMute(true);
+        return memberToMute.setMute(true);
     }
-
 }

@@ -10,10 +10,12 @@ module.exports = class Servers {
         return this._servers;
     }
 
-    getServer(guild) {
+    getServerConfig(guild) {
+        if(!guild) return undefined;
+
         let server = this._servers.get(guild.id);
         if(!server) {
-            server = new ServerConfig();
+            server = new ServerConfig(guild);
             this.addServer(guild.id, server);
         }
         return server;

@@ -14,22 +14,22 @@ module.exports = {
 
 
 function toggleNotificationNewEmoji(message, args) {
-    const { client } = message;
-    const { mentions } = message;
+    const { client, guild, mentions } = message;
+    const serverConfig = client.servers.getServerConfig(guild);
 
     console.log(args[0]);
     if(args[0]) {
         if(args[0] == 'on') {
             if(mentions && mentions.channels && mentions.channels.size > 0) {
-                client.notifyChannelOfEmoji = message.mentions.channels.first();
-                client.notifyNewEmoji = true;
+                serverConfig.notifyChannelOfEmoji = message.mentions.channels.first();
+                serverConfig.notifyNewEmoji = true;
                 return;
             }
-            console.log(client.notifyChannelOfEmoji ? client.notifyChannelOfEmoji.name : 'no channel');
-            if(client.notifyChannelOfEmoji) return client.notifyNewEmoji = true;
+            console.log(serverConfig.notifyChannelOfEmoji ? serverConfig.notifyChannelOfEmoji.name : 'no channel');
+            if(serverConfig.notifyChannelOfEmoji) return serverConfig.notifyNewEmoji = true;
         }
         else if(args[0] == 'off') {
-            return message.client.notifyNewEmoji = false;
+            return serverConfig.notifyNewEmoji = false;
         }
     }
 }

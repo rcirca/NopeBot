@@ -1,5 +1,5 @@
 const messageContentParsing = require('../helper-modules/message-content-parsing');
-
+const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'callate',
     description: 'Premitive way to mute someone, deletes their message as it gets displayed',
@@ -12,21 +12,22 @@ module.exports = {
 };
 
 function muteUser(message, args) {
-    const { member } = message;
-    console.log('Check if you can mute user');
-    if(message.author.id !== message.guild.ownerID && !member.roles.find(p => p.name === 'LWD' || p.name === 'DJ' || p.name === 'Mod')) return;
+    const { client, member, guild } = message;
 
-    console.log('User is owner, or has roles');
+    const serverConfig = client.servers.getServerConfig(guild);
+
+    if(member.id !== guild.ownerID && !member.hasRole(permissions.manageMessages)) return;
+
     if(args[0]) {
         const userMentioned = messageContentParsing(args[0]);
-        const user = message.client.users.get(userMentioned);
+        const user = client.users.get(userMentioned);
         if(!user) {
             return message.reply('Please use a proper mention if you want to mute someone');
         }
-        else if(user.id === message.guild.ownerID) {
+        else if(user.id === guild.ownerID) {
             return message.reply('Can not mute owner');
         }
-        message.client.mutedUsers.set(user.id, user);
-        console.log(`Muted ${user}`);
+        serverConfig.mutedUsers.set(user.id, user);
+        console.log(`Muted ${user} on ${serverConfig.serverName}`);
     }
 }

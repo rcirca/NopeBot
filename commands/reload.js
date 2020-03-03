@@ -1,6 +1,8 @@
+const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'reload',
     description: 'Reloads a command',
+    guildOnly: true,
     execute(message, args) {
         reloadCommand(message, args);
     },
@@ -8,6 +10,9 @@ module.exports = {
 
 
 function reloadCommand(message, args) {
+    const { guild, member } = message;
+    if(guild.ownerID !== member.id && !member.hasPermission(permissions.admin)) return;
+
     if(!args.length) {
         return message.author.send(`Didn't pass a command to reload, ${message.author}`);
     }

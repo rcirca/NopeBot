@@ -1,4 +1,5 @@
 const messageContentParsing = require('../helper-modules/message-content-parsing');
+const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'purge',
     description: 'Purge user\' messages',
@@ -12,9 +13,9 @@ module.exports = {
 
 function purge(message, args) {
     if(args[0]) {
-        const { member } = message;
+        const { guild, member } = message;
 
-        if(message.author.id !== message.guild.ownerID && !member.roles.find(p => p.name === 'LWD' || p.name === 'DJ' || p.name === 'Mod')) return;
+        if(member.id !== guild.ownerID && !member.hasPermission(permissions.manageMessages)) return;
 
         const userMentioned = messageContentParsing(args[0]);
         const user = message.client.users.get(userMentioned);

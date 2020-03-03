@@ -8,10 +8,17 @@ always rely on Discord.Collection, or just use map?
 
 module.exports = class ServerConfig {
     constructor(guild) {
-        this._guild = guild;
+        if(!guild) throw 'no guild specified';
+
+        this._serverId = guild.id;
+        this._serverName = guild.name;
         this._mutedUsers = new Discord.Collection();
         this._notifyNewEmojis = false;
         this._notifyChannelOfEmojis = undefined;
+    }
+
+    get serverName() {
+        return this._serverName;
     }
 
     get notifyNewEmojis() {

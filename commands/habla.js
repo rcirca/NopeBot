@@ -1,5 +1,6 @@
 const { prefix } = require('../config.json');
 const messageContentParsing = require('../helper-modules/message-content-parsing');
+const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'habla',
     description: 'Unmute user or get a list of users who are muted',
@@ -13,20 +14,18 @@ module.exports = {
 
 
 function unmute(message, args) {
+    const { client, guild, member } = message;
+    const serverConfig = client.servers.getServerConfig(guild);
     if(args[0]) {
-        const { member } = message;
-        console.log('Try to unmute user');
-        if(message.author.id !== message.guild.ownerID && !member.roles.find(p => p.name === 'LWD' || p.name === 'DJ' || p.name === 'Mod')) return;
-
-        console.log('Is owner or has role to unmute');
+        if(member.id !== guild.ownerID && !member.hasPermission(permissions.manageMessages)) return;
 
         const userMentioned = messageContentParsing(args[0]);
-        const user = message.client.users.get(userMentioned);
+        const user = client.users.get(userMentioned);
         if(!user) {
             return message.reply('Please use a proper mention if you want to mute someone');
         }
 
-        const deletedUser = message.client.mutedUsers.delete(user.id);
+        const deletedUser = serverConfig.mutedUsers.delete(user.id);
         if(!deletedUser) {
             return message.reply(`Could not find user to unmute: ${user}`);
         }
@@ -42,20 +41,18 @@ function unmute(message, args) {
 
 function listMutedUsers(message) {
     const data = [];
-    const { mutedUsers } = message.client;
+    const { client, guild } = message;
+    const serverConfig = client.servers.getServerConfig(guild);
 
     if(!message) return;
-    if(mutedUsers.size == 0) {
-        console.log(mutedUsers.size);
+    if(serverConfig.mutedUsers.size == 0) {
         message.author.send('No users are muted currently');
     }
     else {
-        console.log(mutedUsers.size);
         data.push('List of users muted: ');
-        data.push(mutedUsers.map(mu => mu.username).join(', '));
+        data.push(serverConfig.mutedUsers.map(mu => mu.username).join(', '));
         data.push(`\n you Can use \`${prefix}habla @[username]\` to unmute that user`);
         message.author.send(data, { split: true });
     }
-    console.log('deleting message');
     return message.delete();
 }
