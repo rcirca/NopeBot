@@ -2,6 +2,8 @@ const fs = require ('fs');
 const { token } = require('./config.json');
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const ServerManager = require('./models/servers.js');
+const servers = new ServerManager();
 
 fs.readdir('./events/', (err, files) =>{
     files.forEach(file =>{
@@ -11,10 +13,9 @@ fs.readdir('./events/', (err, files) =>{
     });
 });
 
+client.servers = servers;
 client.commands = new Discord.Collection();
-// probably better per server
-client.mutedUsers = new Discord.Collection();
-client.chatRestricted = new Discord.Collection();
+
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 commandFiles.forEach(file => {

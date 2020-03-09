@@ -2,13 +2,23 @@ const { prefix } = require('../config.json');
 
 module.exports = (client, message) =>{
 
-    const mutedUser = client.mutedUsers.get(message.author.id);
-    if(mutedUser) {
-        message.delete();
-        return;
+    if(message.author.bot) return;
+
+    try {
+        const serverConfig = message.client.servers.getServerConfig(message.guild);
+        if(serverConfig) {
+            if(isUserMuted(serverConfig, message)) {
+                message.delete();
+                return;
+            }
+        }
+    }
+    catch (error) {
+        console.log(error);
     }
 
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    if (!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
@@ -35,3 +45,13 @@ module.exports = (client, message) =>{
         message.reply('Error executing command');
     }
 };
+
+
+function isUserMuted(serverConfig, message) {
+    const { servers } = message.client;
+    if(!servers) return false;
+    const mutedUser = serverConfig.mutedUsers.get(message.author.id);
+    if(mutedUser) return true;
+
+    return false;
+}
