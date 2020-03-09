@@ -3,7 +3,7 @@ const { token } = require('./config.json');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const ServerManager = require('./models/servers.js');
-const servers = new ServerManager.Servers();
+const servers = new ServerManager();
 
 fs.readdir('./events/', (err, files) =>{
     files.forEach(file =>{

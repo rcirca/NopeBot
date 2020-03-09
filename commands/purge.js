@@ -2,7 +2,7 @@ const messageContentParsing = require('../helper-modules/message-content-parsing
 const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'purge',
-    description: 'Purge user\' messages',
+    description: 'Purge user\'s messages',
     usage: '[user] [amount_to_purge]',
     guildOnly: true,
     execute(message, args) {

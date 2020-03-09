@@ -5,7 +5,7 @@ module.exports = (client, message) =>{
     if(message.author.bot) return;
 
     try {
-        const serverConfig = message.client.servers.getServer(message.guild);
+        const serverConfig = message.client.servers.getServerConfig(message.guild);
         if(serverConfig) {
             if(isUserMuted(serverConfig, message)) {
                 message.delete();

@@ -13,11 +13,11 @@ module.exports = class Servers {
     getServerConfig(guild) {
         if(!guild) return undefined;
 
-        let server = this._servers.get(guild.id);
-        if(!server) {
-            server = new ServerConfig(guild);
-            this.addServer(guild.id, server);
+        let serverConfig = this._servers.get(guild.id);
+        if(!serverConfig) {
+            serverConfig = new ServerConfig(guild);
+            this._servers.set(guild.id, serverConfig);
         }
-        return server;
+        return serverConfig;
     }
 };

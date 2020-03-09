@@ -1,9 +1,14 @@
 module.exports = (client, emoji) => {
-    if(!client.notifyNewEmoji || !client.notifyChannelOfEmoji) return;
+
+    if(!emoji || !emoji.guild) return;
+
+    const serverConfig = client.servers.getServerConfig(emoji.guild);
+    const { notifyNewEmoji, notifyChannelOfEmoji } = serverConfig;
+    if(!notifyNewEmoji || !notifyChannelOfEmoji) return;
 
 
     console.log(emoji.name);
-    client.notifyChannelOfEmoji.send('New emoji added:');
-    client.notifyChannelOfEmoji.send(`${emoji}`);
+    notifyChannelOfEmoji.send('New emoji added:');
+    notifyChannelOfEmoji.send(`${emoji}`);
 
 };
