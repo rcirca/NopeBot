@@ -1,6 +1,7 @@
 const fs = require ('fs');
 const { token } = require('./config.json');
 const Discord = require('discord.js');
+const checkAliasesHaveNoConlicts = require('./helper-modules/check-aliases-have-no-conflict.js');
 const client = new Discord.Client();
 const ServerManager = require('./models/servers.js');
 const servers = new ServerManager();
@@ -22,5 +23,7 @@ commandFiles.forEach(file => {
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
 });
+
+if(!checkAliasesHaveNoConlicts(client)) return;
 
 client.login(token);
