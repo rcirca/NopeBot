@@ -3,6 +3,7 @@ const messageContentParsing = require('../helper-modules/message-content-parsing
 const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'unmute',
+    aliases: ['um'],
     description: 'Unmute chat user or get a list of users who are muted',
     usage: '[user_to_unmute]',
     altUsage: true,

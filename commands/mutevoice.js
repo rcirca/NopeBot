@@ -3,6 +3,7 @@ const permissions = require('../helper-modules/permissions');
 
 module.exports = {
     name: 'mutevoice',
+    aliases: ['mv', 'stfu'],
     description: 'mute voice of a user',
     usage: '[user_to_mute_voice]',
     args: true,
