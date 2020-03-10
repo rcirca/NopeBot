@@ -2,6 +2,7 @@ const messageContentParsing = require('../helper-modules/message-content-parsing
 const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'mute',
+    aliases: ['m'],
     description: 'Mute a user by deleting their chat messages as they come in',
     usage: '[user]',
     args: true,

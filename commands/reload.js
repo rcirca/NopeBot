@@ -1,6 +1,7 @@
 const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'reload',
+    aliases: ['r'],
     description: 'Reloads a command',
     guildOnly: true,
     execute(message, args) {

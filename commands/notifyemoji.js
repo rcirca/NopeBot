@@ -1,5 +1,6 @@
 module.exports = {
     name: 'notifyemoji',
+    aliases: ['ne'],
     description: 'Turn on/off notification of new emojis to a channel. Have to at least turn on once with channel, to toggle, or turn it on, on different channel',
     args: true,
     guildOnly: true,

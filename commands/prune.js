@@ -1,6 +1,7 @@
 const permissions = require('../helper-modules/permissions.js');
 module.exports = {
     name: 'prune',
+    aliases: ['prn'],
     description: 'Prune the last X messages that are not 2 weeks old',
     usage: '[amount]',
     args: true,
