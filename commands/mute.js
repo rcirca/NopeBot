@@ -17,7 +17,7 @@ function muteUser(message, args) {
 
     const serverConfig = client.servers.getServerConfig(guild);
 
-    if(member.id !== guild.ownerID && !member.hasRole(permissions.manageMessages)) return;
+    if(member.id !== guild.ownerID && !member.hasPermission(permissions.manageMessages)) return;
 
     if(args[0]) {
         const userMentioned = messageContentParsing(args[0]);
